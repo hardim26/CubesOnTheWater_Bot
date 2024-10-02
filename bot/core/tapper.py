@@ -215,7 +215,7 @@ class Tapper:
 
             app_user_data = await self.login(http_client=http_client, init_data=init_data)
 
-            mining_delay = [0.8, 2, 2.8, 4, 5.2, 6, 6.8, 8]
+            mining_delay = [0.8, 2, 2.8, 4, 5.2, 6, 6.8, 8, 10, 12]
 
             if app_user_data is not None:
 
@@ -227,7 +227,7 @@ class Tapper:
 
                 if app_user_data.get('banned_until_restore') == 'true':
                     logger.warning(f"{self.session_name} | "
-                                   f"Energy recovery. Going sleep {1000 - int(app_user_data.get('energy'))} seconds")
+                                   f"Energy recovery. Going sleep {2000 - int(app_user_data.get('energy'))} seconds")
 
                     boost_json = await self.boost_pool(http_client=http_client,
                                                        token=app_user_data.get('token'),
@@ -239,7 +239,8 @@ class Tapper:
                                        f"total invest: "
                                        f"{boost_json.get('poolInvested')} | your invest: "
                                        f"{boost_json.get('userInvested')}")
-                    await asyncio.sleep(1000 - int(app_user_data.get('energy')))
+                    t = randint(1000, 2000)
+                    await asyncio.sleep(t - int(app_user_data.get('energy')))
 
                 status = await self.get_tg_x(http_client=http_client, token=app_user_data.get('token'))
                 last_claim_time = time()
@@ -250,8 +251,9 @@ class Tapper:
                         mine_data = await self.mine(http_client=http_client, token=app_user_data.get('token'))
                         if mine_data == 'energy recovery':
                             app_user_data = await self.login(http_client=http_client, init_data=init_data)
+                            t = randint(1000, 2000)
                             logger.warning(f"{self.session_name} | "
-                                           f"Energy recovery. Going sleep {1000 - int(app_user_data.get('energy'))} "
+                                           f"Energy recovery. Going sleep {t - int(app_user_data.get('energy'))} "
                                            f"seconds")
 
                             boost_json = await self.boost_pool(http_client=http_client,
@@ -264,8 +266,8 @@ class Tapper:
                                                f"total invest: "
                                                f"{boost_json.get('poolInvested')} | your invest: "
                                                f"{boost_json.get('userInvested')}")
-
-                            await asyncio.sleep(1000 - int(app_user_data.get('energy')))
+                            t = randint(1000, 2000)
+                            await asyncio.sleep(t - int(app_user_data.get('energy')))
                             continue
 
                         if mine_data == 'not enough':
