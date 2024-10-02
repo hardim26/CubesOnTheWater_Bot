@@ -56,7 +56,7 @@ class Tapper:
 
                     if not start_command_found:
                         if settings.REF_ID == '':
-                            await self.tg_client.send_message("cubesonthewater_bot", "/start NzM3ODQ0NDY1")
+                            await self.tg_client.send_message("cubesonthewater_bot", "/start MTk2OTAyNzMy")
                         else:
                             await self.tg_client.send_message("cubesonthewater_bot", f"/start {settings.REF_ID}")
                 except (Unauthorized, UserDeactivated, AuthKeyUnregistered):
