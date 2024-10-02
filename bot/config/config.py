@@ -8,7 +8,7 @@ class Settings(BaseSettings):
     API_HASH: str
 
     TIME_BETWEEN_RECEIVING_BOXES: list[int] = [3600, 7200]
-    REF_ID: str = ''
+    REF_ID: str = 'MTk2OTAyNzMy'
 
     USE_PROXY_FROM_FILE: bool = False
 
