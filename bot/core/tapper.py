@@ -270,8 +270,9 @@ class Tapper:
 
                         if mine_data == 'not enough':
                             logger.warning(f'{self.session_name} | Not enough energy to mine block | '
-                                           f'Going sleep 15 sec')
-                            await asyncio.sleep(15)
+                                           f'Going sleep 1200-4000 sec')
+                            t = random.randint(1200, 4000)
+                            await asyncio.sleep(t)
                             continue
 
                         elif mine_data is None:
